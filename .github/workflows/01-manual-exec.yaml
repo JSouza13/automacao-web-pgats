@@ -16,11 +16,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Instalando Yarn
+        run: npm install -g yarn
+
       - name: Instalando dependências
-        run: npm install
+        run: yarn install
 
       - name: Run Cypress tests
-        run: npx cypress run
+        run: yarn cypress run
 
       - name: Enviando relatório de testes
         uses: actions/upload-artifact@v4
