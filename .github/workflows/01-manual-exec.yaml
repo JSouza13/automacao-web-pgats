@@ -1,0 +1,31 @@
+# nome que vai aparecer no github
+name: 'Execucao manual'
+# Triggers ou Gatilhos de Execução
+on:
+  workflow_dispatch:
+
+jobs:
+  # Descrição do job
+  e2e-tests:
+    # maquina que vai rodar
+    runs-on: ['ubuntu-latest']
+
+    #passo a paso das acoes do job
+    steps:
+      # - run: echo 'Execucao manual'
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Instalando dependências
+        run: npm install
+
+      - name: Run Cypress tests
+        run: npx cypress run
+
+      - name: Enviando relatório de testes
+        uses: actions/upload-artifact@v4
+        # por padrao a pipeline cancela se houver erro para evitar que ele cancele o passo seguinte no caso de erro, se quiser que a pipeline continue, basta adicionar o parametro 'if: ${{ !cancelled() }}'
+        if: ${{ !cancelled() }}
+        with:
+          name: relatorio-de-testes
+          path: ./cypress/reports/**/*
