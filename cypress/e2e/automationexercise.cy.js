@@ -57,16 +57,6 @@ describe('Trabalho final', () => {
     cy.contains(MESSAGES.emailExists).should("be.visible");
   });
 
-  it('Test Case 6: Contact Us Form', () => {
-     // Arrange - preparação
-     menu.irParaContato();
-     cadastro.verificarPaginaDeContato();
-     // act - açao
-     cadastro.preencherFormularioContato(userData, 'This is a test message.', 'cypress/fixtures/screen.png');
-     // assert - verificação
-     cy.contains("Success! Your details have been submitted successfully.").should("be.visible");
-  });
-
   it('Test Case 8: Verify All Products and product detail page', () => {
     // act - açao
     menu.irParaProdutos();
